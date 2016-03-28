@@ -191,7 +191,7 @@ def another():
 @app.route('/add', methods=['POST'])
 def add():
   name = request.form['name']
-  cur2 = g.conn.execute("SELECT name FROM Customers WHERE name= %s", name)
+  cur2 = g.conn.execute("SELECT name, cid, email, phone, ssn FROM Customers WHERE name= %s", name)
   data2=cur2.fetchall()
   return render_template("index2.html", data2=data2)
 
