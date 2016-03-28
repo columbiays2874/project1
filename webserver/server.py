@@ -203,6 +203,12 @@ def debit_balance():
   data3=cur_debit.fetchall()
   return render_template("debit_balance.html", data3=data3)
 
+@app.route('/credit_balance', methods=['POST'])
+def credit_balance():
+  name = request.form['name']
+  cur_credit = g.conn.execute("select name, credit_owns.credit_no, credit_line from customers, credit_owns, credit_accounts where customers.cid=credit_owns.cid and credit_owns.credit_no=credit_accounts.credit_no and name=%s", name)
+  data4=cur_credit.fetchall()
+  return render_template("credit_balance.html", data4=data4)
 
 
 
