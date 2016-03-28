@@ -184,7 +184,7 @@ def another():
 def add():
   branch_id = request.form['branch_id']
   name = request.form['name']
-  g.conn.execute("INSERT INTO branches VALUES (?, ?, NULL)", [branch_id, name])
+  g.conn.execute("INSERT INTO branches VALUES (?, ?, NULL)", branch_id, name)
   return redirect('/')
 
 
