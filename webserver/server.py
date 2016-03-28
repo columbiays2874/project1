@@ -196,6 +196,29 @@ def add():
   return render_template("info.html", data2=data2)
 
 
+@app.route('/debit_balance', methods=['POST'])
+def add():
+  name = request.form['name']
+  cur_debit = g.conn.execute("select name, debit_owns.debit_no, balance from customers, debit_owns, debit_accounts where customers.cid=debit_owns.cid and debit_owns.debit_no=debit_accounts.debit_no and name=%s", name)
+  data3=cur_debit.fetchall()
+  return render_template("debit_balance.html", data3=data3)
+
+
+
+
+
+
+select name, debit_owns.debit_no, balance from customers, debit_owns, debit_accounts where customers.cid=debit_owns.cid and debit_owns.debit_no=debit_accounts.debit_no
+and name='Lily Stwert'
+
+select name, credit_owns.credit_no, credit_line from customers, credit_owns, credit_accounts
+where customers.cid=credit_owns.cid and credit_owns.credit_no=credit_accounts.credit_no
+and name='Lily Stwert'
+
+
+
+
+
 @app.route('/login')
 def login():
     abort(401)
