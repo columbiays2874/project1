@@ -199,7 +199,7 @@ def info():
 @app.route('/debit_balance', methods=['POST'])
 def debit_balance():
   name = request.form['name']
-  cur_debit = g.conn.execute("select name, debit_owns.debit_no, balance from customers, debit_owns, debit_accounts where customers.cid=debit_owns.cid and debit_owns.debit_no=debit_accounts.debit_no and name=%s", name)
+  cur_debit = g.conn.execute("select name, debit_owns.debit_no, balance from customers, debit_accounts, debit_owns where customers.cid=debit_owns.cid and debit_accounts.debit_no=debit_owns.debit_no and name=%s", name)
   data3=cur_debit.fetchall()
   return render_template("debit_balance.html", data3=data3)
 
