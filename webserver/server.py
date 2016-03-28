@@ -32,7 +32,7 @@ app = Flask(__name__, template_folder=tmpl_dir)
 #
 #     DATABASEURI = "postgresql://ewu2493:foobar@w4111db.eastus.cloudapp.azure.com/ewu2493"
 #
-DATABASEURI = "sqlite:///test.db"
+DATABASEURI = "postgresql://ys2874:WHPMPK@w4111db.eastus.cloudapp.azure.com/ys2874"
 
 
 #
@@ -56,12 +56,12 @@ engine = create_engine(DATABASEURI)
 # 
 # The setup code should be deleted once you switch to using the Part 2 postgresql database
 #
-engine.execute("""DROP TABLE IF EXISTS test;""")
-engine.execute("""CREATE TABLE IF NOT EXISTS test (
-  id serial,
-  name text
-);""")
-#engine.execute("""INSERT INTO test(name) VALUES ('grace hopper'), ('alan turing'), ('ada lovelace');""")
+#engine.execute("""DROP TABLE IF EXISTS test;""")
+#engine.execute("""CREATE TABLE IF NOT EXISTS test (
+#  id serial,
+#  name text
+#);""")
+##engine.execute("""INSERT INTO test(name) VALUES ('grace hopper'), ('alan turing'), ('ada lovelace');""")
 #
 # END SQLITE SETUP CODE
 #
@@ -125,7 +125,7 @@ def index():
   #
   # example of a database query
   #
-  cursor = g.conn.execute("SELECT name FROM test")
+  cursor = g.conn.execute("SELECT name FROM branches")
   names = []
   for result in cursor:
     names.append(result['name'])  # can also be accessed using result[0]
@@ -183,7 +183,7 @@ def another():
 @app.route('/add', methods=['POST'])
 def add():
   name = request.form['name']
-  g.conn.execute('INSERT INTO test VALUES (NULL, ?,1)', name)
+  g.conn.execute("INSERT INTO branches VALUES ('22', ?, 'address')", name)
   return redirect('/')
 
 
