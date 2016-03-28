@@ -189,7 +189,7 @@ def another():
 
 # Example of adding new data to the database
 @app.route('/info', methods=['POST'])
-def add():
+def info():
   name = request.form['name']
   cur2 = g.conn.execute("SELECT name, cid, email, phone, ssn FROM Customers WHERE name= %s", name)
   data2=cur2.fetchall()
@@ -197,7 +197,7 @@ def add():
 
 
 @app.route('/debit_balance', methods=['POST'])
-def add():
+def debit_balance():
   name = request.form['name']
   cur_debit = g.conn.execute("select name, debit_owns.debit_no, balance from customers, debit_owns, debit_accounts where customers.cid=debit_owns.cid and debit_owns.debit_no=debit_accounts.debit_no and name=%s", name)
   data3=cur_debit.fetchall()
