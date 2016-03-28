@@ -195,7 +195,7 @@ def another():
 # Example of adding new data to the database
 @app.route('/add', methods=['POST'])
 def add():
-  name = request.form['name1']
+  name1 = request.form['name1']
   g.conn.execute('INSERT INTO test1 VALUES (?)', name1)
   return redirect('/')
 
