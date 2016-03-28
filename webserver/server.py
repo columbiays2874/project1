@@ -188,7 +188,7 @@ def another():
 
 
 # Example of adding new data to the database
-@app.route('/info', methods=['POST'])
+@app.route('/info', methods=['GET'])
 def info():
   name = request.form['name']
   cur2 = g.conn.execute("SELECT bank.name, branches.name, customers.name, customers.cid, email, phone, ssn FROM bank, branches, Customers, manages, bank_branch WHERE bank.bank_id=bank_branch.bank_id and bank_branch.branch_id=branches.branch_id and branches.branch_id=manages.branch_id and manages.cid=customers.cid and customers.name= %s", name)
