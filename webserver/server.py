@@ -18,7 +18,7 @@ Read about it online.
 import os
 from sqlalchemy import *
 from sqlalchemy.pool import NullPool
-from flask import Flask, request, render_template, g, redirect, Response
+from flask import Flask, request, render_template, g, redirect, Response, flash
 
 tmpl_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
 app = Flask(__name__, template_folder=tmpl_dir)
@@ -201,6 +201,8 @@ def debit_balance():
   name = request.form['name']
   cur_debit = g.conn.execute("select name, debit_owns.debit_no, balance from customers, debit_accounts, debit_owns where customers.cid=debit_owns.cid and debit_accounts.debit_no=debit_owns.debit_no and name=%s", name)
   data3=cur_debit.fetchall()
+  if data3==[]:
+      flash('Not Exist')
   return render_template("debit_balance.html", data3=data3)
 
 @app.route('/credit_balance', methods=['POST'])
