@@ -125,10 +125,10 @@ def index():
   #
   # example of a database query
   #
-  cursor = g.conn.execute("SELECT name FROM branches")
+  cursor = g.conn.execute("SELECT * FROM branches")
   names = []
   for result in cursor:
-    names.append(result['name'])  # can also be accessed using result[0]
+    names.append(result[:])  # can also be accessed using result[0]
   cursor.close()
 
   #
@@ -182,8 +182,9 @@ def another():
 # Example of adding new data to the database
 @app.route('/add', methods=['POST'])
 def add():
+  branch_id = request.form['branch_id']
   name = request.form['name']
-  g.conn.execute("INSERT INTO branches VALUES ('22', ?, 'address')", name)
+  g.conn.execute("INSERT INTO branches VALUES (?, ?, NULL)", [branch_id, name])
   return redirect('/')
 
 
