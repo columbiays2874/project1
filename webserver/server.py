@@ -191,7 +191,7 @@ def another():
 @app.route('/info', methods=['POST'])
 def info():
   name = request.form['name']
-  cur2 = g.conn.execute("SELECT bank.name, branches.name, customers.name, cid, email, phone, ssn FROM bank, branches, Customers, manages, bank_branch WHERE bank.bank_id=bank_branch.bank_id and bank_branch.branch_id=branches.branch_id and branches.branch_id=manages.branch_id and manages.cid=customers.cid and customers.name= %s", name)
+  cur2 = g.conn.execute("SELECT bank.name, branches.name, customers.name, customers.cid, email, phone, ssn FROM bank, branches, Customers, manages, bank_branch WHERE bank.bank_id=bank_branch.bank_id and bank_branch.branch_id=branches.branch_id and branches.branch_id=manages.branch_id and manages.cid=customers.cid and customers.name= %s", name)
   data2=cur2.fetchall()
   return render_template("info.html", data2=data2)
 
