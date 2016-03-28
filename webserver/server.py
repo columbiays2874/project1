@@ -188,12 +188,12 @@ def another():
 
 
 # Example of adding new data to the database
-@app.route('/add', methods=['POST'])
+@app.route('/info', methods=['POST'])
 def add():
   name = request.form['name']
   cur2 = g.conn.execute("SELECT name, cid, email, phone, ssn FROM Customers WHERE name= %s", name)
   data2=cur2.fetchall()
-  return render_template("index2.html", data2=data2)
+  return render_template("info.html", data2=data2)
 
 
 @app.route('/login')
