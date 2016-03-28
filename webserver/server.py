@@ -191,9 +191,9 @@ def another():
 @app.route('/add', methods=['POST'])
 def add():
   name = request.form['name']
-  res = g.conn.execute('select name from test where name= %s', name)
+  res = g.conn.execute("select name from test where name= %s", name)
   context2 = dict(data2 = res)
-  return render_template("index2.html", **context2)
+  return render_template("index2.html")
 #  return redirect('/')
 
 
