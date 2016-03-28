@@ -201,8 +201,7 @@ def debit_balance():
   name = request.form['name']
   cur_debit = g.conn.execute("select name, debit_owns.debit_no, balance from customers, debit_accounts, debit_owns where customers.cid=debit_owns.cid and debit_accounts.debit_no=debit_owns.debit_no and name=%s", name)
   data3=cur_debit.fetchall()
-  if data3==[]:
-      flash('Not Exist')
+  flash('Not Exist')
   return render_template("debit_balance.html", data3=data3)
 
 @app.route('/credit_balance', methods=['POST'])
