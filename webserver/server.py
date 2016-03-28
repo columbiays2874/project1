@@ -193,7 +193,7 @@ def add():
   name = request.form['name']
   res = g.conn.execute("select name from test where name= %s", name)
   context2 = dict(data2 = res)
-  return render_template("index2.html")
+  return render_template("index.html")
 #  return redirect('/')
 
 
