@@ -165,7 +165,7 @@ def index():
   #     <div>{{n}}</div>
   #     {% endfor %}
   #
-  context = dict(data = names)
+  context = dict(2data = names2)
 
 
   #
