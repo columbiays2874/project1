@@ -191,8 +191,8 @@ def another():
 @app.route('/add', methods=['POST'])
 def add():
   name = request.form['name']
-  g.conn.execute('INSERT INTO bank VALUES (11, ?, NULL)', name)
-  return redirect('/')
+  data2 = g.conn.execute("SELECT name FROM Customers WHERE name= %s", name)
+  return render_template("index2.html")
 
 
 @app.route('/login')
